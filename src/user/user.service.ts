@@ -19,6 +19,14 @@ export class UserService {
     });
   }
 
+  async findOneByEmail(email: string): Promise<User> {
+    return await this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+  }
+
   async create(userData: CreateUserDto): Promise<User> {
     const { name, email, password } = userData;
     if (!name || !email || !password) {
